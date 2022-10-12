@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ecommerce_clean/config/locale/app_localizations.dart';
 import 'package:ecommerce_clean/core/utils/app_colors.dart';
 import 'package:ecommerce_clean/core/utils/app_strings.dart';
 import 'package:ecommerce_clean/features/random_quote/presentation/cubit/random_quote_cubit.dart';
@@ -50,7 +49,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
                   margin: const EdgeInsets.symmetric(vertical: 15),
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.primary),
+                      shape: BoxShape.circle, color:primary),
                   child: const Icon(
                     Icons.refresh,
                     size: 28,
@@ -72,20 +71,20 @@ class _QuoteScreenState extends State<QuoteScreen> {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
-      leading: IconButton(
-        icon: Icon(
-          Icons.translate_outlined,
-          color: AppColors.primary,
-        ),
-        onPressed: () {
-          if (AppLocalizations.of(context)!.isEnLocale) {
-            BlocProvider.of<LocaleCubit>(context).toArabic();
-          } else {
-            BlocProvider.of<LocaleCubit>(context).toEnglish();
-          }
-        },
-      ),
-      title: Text(AppLocalizations.of(context)!.translate('app_name')!),
+      // leading: IconButton(
+      //   icon: Icon(
+      //     Icons.translate_outlined,
+      //     color: primary,
+      //   ),
+      //   onPressed: () {
+      //     if (AppLocalizations.of(context)!.isEnLocale) {
+      //       BlocProvider.of<LocaleCubit>(context).toArabic();
+      //     } else {
+      //       BlocProvider.of<LocaleCubit>(context).toEnglish();
+      //     }
+      //   },
+      // ),
+      // title: Text(AppLocalizations.of(context)!.translate('app_name')!),
     );
     return RefreshIndicator(
         child: Scaffold(appBar: appBar, body: _buildBodyContent()),

@@ -1,5 +1,4 @@
 const String imgPath = 'assets/images';
 
-class ImgAssets {
-  static const String quote = '$imgPath/quote.png';
-}
+const String quote = '$imgPath/logo.png';
+const String logo = '$imgPath/logo.png';

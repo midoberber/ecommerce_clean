@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset(ImgAssets.quote),
+        child: Image.asset(quote),
       ),
     );
   }

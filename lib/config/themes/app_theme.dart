@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 ThemeData appTheme() {
   return ThemeData(
-      primaryColor: AppColors.primary,
-      hintColor: AppColors.hint,
+      primaryColor: primary,
+      hintColor: hint,
       brightness: Brightness.light,
       scaffoldBackgroundColor: Colors.white,
       fontFamily: AppStrings.fontFamily,

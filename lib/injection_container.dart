@@ -1,4 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_clean/app/app_repository.dart';
+import 'package:ecommerce_clean/app/app_storage.dart';
+import 'package:ecommerce_clean/app/cubit_app_main/bloc_main_cubit.dart';
+import 'package:ecommerce_clean/app/injection_container_app.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:ecommerce_clean/core/api/api_consumer.dart';
@@ -6,8 +10,6 @@ import 'package:ecommerce_clean/core/api/dio_consumer.dart';
 import 'package:ecommerce_clean/core/network/netwok_info.dart';
 import 'package:ecommerce_clean/features/random_quote/data/datasources/random_quote_local_data_source.dart';
 import 'package:ecommerce_clean/features/random_quote/data/datasources/random_quote_remote_data_source.dart';
-import 'package:ecommerce_clean/features/random_quote/data/repositories/quote_repository_impl.dart';
-import 'package:ecommerce_clean/features/random_quote/domain/repositories/quote_repository.dart';
 import 'package:ecommerce_clean/features/random_quote/domain/usecases/get_random_quote.dart';
 import 'package:ecommerce_clean/features/random_quote/presentation/cubit/random_quote_cubit.dart';
 import 'package:ecommerce_clean/features/splash/data/datasources/lang_local_data_source.dart';
@@ -24,6 +26,7 @@ Future<void> init() async {
   //! Features
 
   // Blocs
+  await initAppMainjection(sl);
   sl.registerFactory<RandomQuoteCubit>(
       () => RandomQuoteCubit(getRandomQuoteUseCase: sl()));
   sl.registerFactory<LocaleCubit>(
@@ -59,7 +62,10 @@ Future<void> init() async {
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));
 
   //! External
+
   final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(
+      () => AppRepository(KeyValueStorage(sharedPreferences)));
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => LogInterceptor(
       request: true,

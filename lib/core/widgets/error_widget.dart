@@ -15,7 +15,7 @@ class ErrorWidget extends StatelessWidget {
         Center(
           child: Icon(
             Icons.warning_amber_rounded,
-            color: AppColors.primary,
+            color: primary,
             size: 150,
           ),
         ),
@@ -29,8 +29,8 @@ class ErrorWidget extends StatelessWidget {
         ),
         Text(
           "try Agin",
-          style: TextStyle(
-              color: AppColors.hint, fontSize: 18, fontWeight: FontWeight.w500),
+          style:
+              TextStyle(color: hint, fontSize: 18, fontWeight: FontWeight.w500),
         ),
         Container(
           height: 55,
@@ -38,7 +38,7 @@ class ErrorWidget extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 15),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                primary: AppColors.primary,
+                primary: primary,
                 onPrimary: Theme.of(context).primaryColor,
                 elevation: 500,
                 shape: RoundedRectangleBorder(

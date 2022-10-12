@@ -12,7 +12,7 @@ class QuoteContent extends StatelessWidget {
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-          color: AppColors.primary, borderRadius: BorderRadius.circular(30)),
+          color: primary, borderRadius: BorderRadius.circular(30)),
       child: Column(
         children: [
           Text(quote.content,
