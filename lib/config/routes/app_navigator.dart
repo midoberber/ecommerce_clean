@@ -14,4 +14,10 @@ class AppNavigator {
   static dynamic popToFrist({required BuildContext context, dynamic object}) {
     return Navigator.of(context).popUntil((rout) => rout.isFirst);
   }
+
+  static dynamic pushToFrist(
+      {required BuildContext context, required Widget screen}) {
+    return Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => screen), (route) => false);
+  }
 }

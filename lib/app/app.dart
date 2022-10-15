@@ -1,18 +1,17 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ecommerce_clean/app/app_data.dart';
 import 'package:ecommerce_clean/app/cubit_app_main/bloc_main_cubit.dart';
 import 'package:ecommerce_clean/core/utils/app_colors.dart';
-import 'package:ecommerce_clean/features/auth/presentation/pages/home_page.dart';
+import 'package:ecommerce_clean/features/home/presentation/pages/home_page.dart';
 import 'package:ecommerce_clean/features/auth/presentation/pages/intro_page.dart';
 import 'package:ecommerce_clean/features/auth/presentation/pages/login_page.dart';
+import 'package:ecommerce_clean/features/auth/presentation/pages/pin_code_page.dart';
 import 'package:ecommerce_clean/injection_container.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-// import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 class App extends StatelessWidget {
   @override
@@ -26,9 +25,9 @@ class App extends StatelessWidget {
         child: BlocConsumer<BlocMainCubit, BlocMainState>(
             listener: (context, state) {
           if (state is UpdateDataState) {
-            print(state.appData);
+            log(state.appData.toString());
           } else {
-            print(state.props);
+            log(state.props.toString());
           }
         },
             // ignore: prefer_typing_uninitialized_variables
@@ -57,11 +56,7 @@ class App extends StatelessWidget {
             //   currentPage = ComplateInfo();
             //   break;
             case AppState.notVerified:
-              currentPage = Scaffold(
-                appBar: AppBar(
-                  title: Text("PinCOde"),
-                ),
-              );
+              currentPage = PinPage();
               break;
             default:
               currentPage = Scaffold(
@@ -73,7 +68,7 @@ class App extends StatelessWidget {
           }
           return MaterialApp(
               theme: ThemeData(
-                  appBarTheme: AppBarTheme(
+                  appBarTheme: const AppBarTheme(
                     backgroundColor: Colors.transparent,
                     elevation: 0.0,
                   ),
@@ -91,12 +86,10 @@ class App extends StatelessWidget {
               supportedLocales: context.supportedLocales,
               locale: context.locale,
               routes: {
-                // "/login": (_) => LoginPage(),
+                "/login": (_) => LoginPage(),
                 // "/Home": (_) => HomeMain(),
-                // "/pinPage": (_) => PinPage(),
-
-                // put our new route here ...
-                // '/': (context) => currentPage,
+                "/pinPage": (_) => PinPage(),
+                '/': (context) => currentPage,
               },
               home: Builder(
                   builder: (context) => ScreenUtilInit(

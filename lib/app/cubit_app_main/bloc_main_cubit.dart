@@ -19,7 +19,7 @@ class BlocMainCubit extends Cubit<BlocMainState> {
       // ignore: curly_braces_in_flow_control_structures
       return AppState.notSeenTutorial;
     if (_appData!.isGuestUser == null ||
-        _appData!.isGuestUser != null && _appData!.isGuestUser == true)
+        (_appData!.isGuestUser != null && _appData!.isGuestUser == true))
       // ignore: curly_braces_in_flow_control_structures
       return AppState.guest;
 
@@ -61,14 +61,19 @@ class BlocMainCubit extends Cubit<BlocMainState> {
     _appData = _appData!.copyWith(
         userId: data.id.toString(),
         name: data.displayName,
+        tokenCopy: data.token,
         phoneCopy: data.phone,
         emailCopy: data.email,
         photo: data.photoUrl,
+        isCompleteed: data.isCompleted,
+        isGuestUserCopy: data.isCompleted,
+        isvervie: data.isVerfied,
         // tokenCopy: data.token,
         // typeUserCopy: data.typeUser,
         langCode: data.languageCode);
     await repository.store.setAppData(_appData!);
     emit(UpdateDataState(appData: _appData!));
+    // emit(BlocMainInitial());
   }
 
   void seenIntro() async {
@@ -77,7 +82,18 @@ class BlocMainCubit extends Cubit<BlocMainState> {
     } else {
       _appData = _appData!.copyWith(seenTutorial: true, isGuestUserCopy: true);
     }
+    await repository.store.setAppData(_appData!);
+    emit(UpdateDataState(appData: _appData!));
+  }
 
+  void verfied() async {
+    if (_appData == null) {
+      _appData =
+          AppData(isSeenTutorial: true, isGuestUser: true, isVerfied: true);
+    } else {
+      _appData = _appData!
+          .copyWith(seenTutorial: true, isGuestUserCopy: true, isvervie: true);
+    }
     await repository.store.setAppData(_appData!);
     emit(UpdateDataState(appData: _appData!));
   }
